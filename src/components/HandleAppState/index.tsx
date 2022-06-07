@@ -1,7 +1,7 @@
 import { Workbox } from "workbox-window";
 import {useState} from "react";
 
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Snackbar from "@mui/material/Snackbar";
 import Button from "@mui/material/Button";
@@ -42,7 +42,7 @@ export const HandleAppState = ({wb}: { wb: Workbox; }) =>
                 action={
                     <>
                         <Button color="secondary" size="small"
-                                onClick={updateWorker}>
+                            onClick={updateWorker}>
                             UPDATE
                         </Button>
                         <IconButton size="small" aria-label="close" onClick={() => setWorkerWaiting(false)}>
@@ -53,9 +53,9 @@ export const HandleAppState = ({wb}: { wb: Workbox; }) =>
                 onClose={() => setWorkerWaiting(false)}
             />
             <Snackbar open={toggleOnline.change}
-                      anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                      autoHideDuration={10000}
-                      onClose={() => setToggleOnline({online: navigator.onLine, change: false})}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={10000}
+                onClose={() => setToggleOnline({online: navigator.onLine, change: false})}
             >
                 <Alert severity={toggleOnline.online ? "success": "error"} >
                     {toggleOnline.online ? strings.ONLINE : strings.OFFLINE}

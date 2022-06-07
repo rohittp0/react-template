@@ -10,8 +10,7 @@ const buildFolder = path.resolve(__dirname, "..", "./build");
 
 module.exports = (env) => ({
     entry: {
-        "bundle": path.resolve(__dirname, "..", "./src/index.tsx"),
-        "chat": path.resolve(__dirname, "..", "src/chat-worker.ts")
+        "bundle": path.resolve(__dirname, "..", "./src/index.tsx")
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
@@ -116,7 +115,6 @@ module.exports = (env) => ({
         new CopyPlugin({
             patterns: [
                 {from: path.resolve(__dirname, "..", "public/robots.txt")},
-                {from: path.resolve(__dirname, "..", "public/libsignal-protocol.js")},
                 {
                     from: path.resolve(__dirname, "..", "public/.well-known/"),
                     to: path.resolve(buildFolder, ".well-known")

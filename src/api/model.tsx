@@ -2,9 +2,11 @@ import Model, {baseUrl, filePost, ModelData,  ModelObject} from "./api";
 import {getAuth} from "./auth";
 
 
-export class ExampleObject extends ModelObject {
+export class ExampleObject extends ModelObject 
+{
 
-    constructor(data: ModelData, baseUrl: string) {
+    constructor(data: ModelData, baseUrl: string) 
+    {
 
         super(data, baseUrl);
         this.fields = ["id"];

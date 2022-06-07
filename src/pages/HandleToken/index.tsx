@@ -6,16 +6,17 @@ import {getQueryVariable} from "../../api/QueryCreator";
 import {baseUrl, post} from "../../api/api";
 
 import Alert from "@mui/material/Alert";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 
 export default function HandleToken()
 {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
 
-    useEffect(() => {
+    useEffect(() => 
+    {
         const code = getQueryVariable("code");
         const state = getQueryVariable("state");
         const error = getQueryVariable("error");
@@ -32,24 +33,28 @@ export default function HandleToken()
             response_type: "token"
         };
 
-        post(`${baseUrl}/auth/o/token/`, kwargs).then((response) => {
+        post(`${baseUrl}/auth/o/token/`, kwargs).then((response) => 
+        {
             setAuth(response.access_token);
             setRefresh(response.refresh_token);
             const location = localStorage.getItem(state as string);
 
-            post(`${baseUrl}/auth/users/me/`, {}, {"Authorization": `Bearer ${response.access_token}`}).then((response) => {
+            post(`${baseUrl}/auth/users/me/`, {}, {"Authorization": `Bearer ${response.access_token}`}).then((response) => 
+            {
                 setObj("user", response.results[0]);
                 if (location)
                     navigate(location);
                 else
                     navigate("/");
 
-            }).catch(() => {
+            }).catch(() => 
+            {
                 setError("Oops something went wrong");
                 setTimeout(navigate, 1000, "/");
             });
 
-        }).catch(reason => {
+        }).catch(reason => 
+        {
             console.log(reason);
             refresh_user();
         });

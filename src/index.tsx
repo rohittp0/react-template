@@ -14,7 +14,8 @@ if (location.hostname !== "localhost" && location.protocol !== "http:" && "servi
     wb.register().catch(console.error);
 
 
-function App() {
+function App() 
+{
     return (
         <>
             <HandleAppState wb={wb}/>
@@ -25,7 +26,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </>
-    )
+    );
 }
 
 ReactDOM.render(<App/>, document.getElementById("root"));

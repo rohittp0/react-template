@@ -1,9 +1,11 @@
+import {useState} from "react";
+
 import {getParam, getQueryVariable} from "./QueryCreator";
 import {baseUrl, post} from "./api";
-import React, {useState} from "react";
 import {client_id, getAuth, getObj, getRefresh, redirect_uri, setAuth, setObj, setRefresh} from "./authUtils";
 
-function makeid(length: number) {
+function makeid(length: number)
+{
     let result = "";
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const charactersLength = characters.length;
@@ -34,18 +36,21 @@ interface User{
     last_name: string,
 }
 
-export function useAuth(needUser: boolean = false) {
+export function useAuth(needUser = false)
+{
     const [auth, setAuthState] = useState(getAuth());
     const [refresh, setRefreshState] = useState(getAuth());
     const [user, setUserState] = useState<User | null>(getObj("user"));
 
-    const refreshState = () => {
+    const refreshState = () =>
+    {
         setAuthState(getAuth());
         setRefreshState(getRefresh());
         setUserState(getObj("user"));
     };
 
-    const performAuth = () => {
+    const performAuth = () =>
+    {
         const state = "st" + makeid(5);
         const invite = getParam("invite", "", false);
 
@@ -66,7 +71,8 @@ export function useAuth(needUser: boolean = false) {
         window.location.href = `${baseUrl}/auth/o/authorize/?` + new URLSearchParams(kwargs);
     };
 
-    const refreshAuth = async () => {
+    const refreshAuth = async () =>
+    {
         const state = getQueryVariable("state");
         const refresh_token = getRefresh();
         const kwargs = {
@@ -89,7 +95,8 @@ export function useAuth(needUser: boolean = false) {
         return auth;
     };
 
-    const removeAuth = () => {
+    const removeAuth = () =>
+    {
 
         setRefresh("");
         setAuth("");
@@ -113,6 +120,6 @@ export function useAuth(needUser: boolean = false) {
         refreshAuth,
         removeAuth,
         performAuth
-    }
+    };
 }
 
