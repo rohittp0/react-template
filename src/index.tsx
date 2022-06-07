@@ -1,19 +1,31 @@
-import React from "react";
+import "./bootstrap.css";
+
 import ReactDOM from "react-dom";
-import App from "./App";
-import {BrowserRouter} from "react-router-dom";
-import { Workbox } from "workbox-window";
+import {Workbox} from "workbox-window";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+
+import HandleToken from "./pages/HandleToken";
+import Home from "./pages/Home";
+import {HandleAppState} from "./components/HandleAppState";
+
+const wb = new Workbox("/sw.js");
+
+if (location.hostname !== "localhost" && location.protocol !== "http:" && "serviceWorker" in navigator)
+    wb.register().catch(console.error);
 
 
-if(location.hostname !== "localhost" && location.protocol !== "http:" && "serviceWorker" in navigator)
-    new Workbox("/sw.js").register();
+function App() {
+    return (
+        <>
+            <HandleAppState wb={wb}/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/set_token" element={<HandleToken/>}/>
+                    <Route path="/" element={<Home/>}/>
+                </Routes>
+            </BrowserRouter>
+        </>
+    )
+}
 
-
-ReactDOM.render(
-    <BrowserRouter>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    </BrowserRouter>,
-    document.getElementById("root")
-);
+ReactDOM.render(<App/>, document.getElementById("root"));
