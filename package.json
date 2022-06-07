@@ -1,0 +1,28 @@
+{
+  "name": "react-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
+    "build": "webpack build --config webpack/webpack.config.js --env env=prod",
+    "stage": "webpack build --config webpack/webpack.config.js --env env=stg",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "ci": "yarn install --prefer-offline --frozen-lockfile",
+    "postinstall": "husky install"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn lint"
+    }
+  }
+}
