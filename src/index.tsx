@@ -10,15 +10,17 @@ import {HandleAppState} from "./components/HandleAppState";
 
 const wb = new Workbox("/sw.js");
 
-if (location.hostname !== "localhost" && location.protocol !== "http:" && "serviceWorker" in navigator)
+const isProduction = location.hostname !== "localhost" && location.protocol !== "http:" && "serviceWorker" in navigator;
+
+if (isProduction)
     wb.register().catch(console.error);
 
 
-function App() 
+function App()
 {
     return (
         <>
-            <HandleAppState wb={wb}/>
+            {isProduction && <HandleAppState wb={wb}/>}
             <BrowserRouter>
                 <Routes>
                     <Route path="/set_token" element={<HandleToken/>}/>
